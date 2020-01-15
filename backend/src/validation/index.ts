@@ -1,0 +1,1 @@
+export { validateRegisterInput } from "./User";

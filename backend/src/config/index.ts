@@ -1,0 +1,1 @@
+export { connectMongoose } from "./database";
