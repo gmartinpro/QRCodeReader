@@ -37,7 +37,9 @@ app.use("/", mainRouter());
 app.use("/public", express.static("public"));
 app.set("port", PORT);
 
+// TODO refacto mongoose
 // connectMongoose().then(() => server.listen(PORT));
+server.listen(PORT);
 
 server.on("error", (error: any) => {
   if (error.syscall !== "listen") {
