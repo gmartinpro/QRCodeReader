@@ -21,3 +21,8 @@ cd backend && yarn start
 - Flutter 
 
 [Please see official documentation](https://flutter.dev/docs/get-started/test-drive?tab=vscode)
+
+
+## Databse Schema
+
+![Image description](MSPRSchema.jpg)
