@@ -9,8 +9,6 @@ module.exports = {
       env: {
         ENV: "dev",
         SECRETJWT: "secret",
-        MONGO_PORT: 30303,
-        MONGO_SERVER: "mongo",
       },
     },
   ],

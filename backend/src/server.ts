@@ -3,11 +3,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import logger from "morgan";
-import { connectMongoose } from "@config/";
+import { InitializeSequelizeConnection } from "@config/";
 import { AddressInfo } from "net";
 import { mainRouter } from "@routes/";
-import passport from "passport";
-import { jwt } from "@middleware/strategy";
 
 // Enebale .env
 dotenv.config();
@@ -28,18 +26,12 @@ if (process.env.ENV === "dev") {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Init passport security and jwt middleware
-app.use(passport.initialize());
-jwt(passport);
-
 // Init route and port
 app.use("/", mainRouter());
 app.use("/public", express.static("public"));
 app.set("port", PORT);
 
-// TODO refacto mongoose
-// connectMongoose().then(() => server.listen(PORT));
-server.listen(PORT);
+InitializeSequelizeConnection().then(() => server.listen(PORT));
 
 server.on("error", (error: any) => {
   if (error.syscall !== "listen") {

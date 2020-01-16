@@ -1,23 +1,23 @@
-import mongoose from "mongoose";
-import { Role } from "@models/index";
+import { Sequelize, Options } from "sequelize";
+import path from "path";
+import { parseAndExecute } from '@routes/Seed/seedControllers';
 
-const MONGO_PORT = process.env.MONGO_PORT || "";
-const MONGO_SERVER = process.env.MONGO_SERVER || "";
+export const sequelizeConfig: Options = {
+  dialect: "sqlite",
+  storage: path.normalize(path.join(__dirname, "..", "database", "sqlite.sqlite")),
+};
 
-export function connectMongoose() {
-  return mongoose
-    .connect(`mongodb://${MONGO_SERVER}:${MONGO_PORT}/db`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(async () => {
-      await Role.initializeDatabase();
-      console.log("\x1b[32m", "Mongodb connected and roles are initialized", "\x1b[0m");
-    })
-    .catch(error => {
-      console.log(`Error while DB connecting to '${MONGO_SERVER}'`);
-      console.error("\x1b[31m", error.message, "\x1b[0m");
-      console.log("Retrying");
-      setTimeout(connectMongoose, 5000);
-    });
+export const sequelize = new Sequelize(sequelizeConfig);
+
+export async function InitializeSequelizeConnection() {
+  try {
+    await sequelize.authenticate();
+    console.log("\x1b[32m", "Sequelize", "\x1b[0m");
+    await parseAndExecute();
+  } catch (error) {
+    console.log(`Error while DB try to connect`);
+    console.error("\x1b[31m", error.message, "\x1b[0m");
+    console.log("Retrying");
+    setTimeout(InitializeSequelizeConnection, 5000);
+  }
 }

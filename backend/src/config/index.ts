@@ -1,1 +1,1 @@
-export { connectMongoose } from "./database";
+export { InitializeSequelizeConnection, sequelize } from "./database";

@@ -1,1 +1,0 @@
-export { validateRegisterInput } from "./User";
