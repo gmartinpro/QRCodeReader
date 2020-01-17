@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mspr/screens/HomeScreen.dart';
 import 'package:mspr/screens/ReductionScreen.dart';
 import 'package:mspr/screens/ScanScreen.dart';
+import 'modules/navigation/CustomBottomNavigationBar.dart';
 import 'modules/navigation/Routes.dart';
 
 void main() => runApp(MyApp());
@@ -25,7 +26,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: Routes.HOME.toString(),
       routes: routes,
       home: MyHomePage(title: 'MSPR'),
     );
@@ -77,33 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: PageView(
-        onPageChanged: (index) {
-          pageChanged(index);
-        },
-        controller: pageController,
-        children: <Widget>[HomeScreen(), ScanScreen(), ReductionScreen()],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Accueil"),
-              backgroundColor: Colors.blue),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt),
-              title: Text("Scan"),
-              backgroundColor: Colors.blue),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              title: Text("Mes reductions"),
-              backgroundColor: Colors.blue),
-        ],
-        onTap: (index) {
-          pageChanged(index);
-        },
-      ),
-    );
+        body: PageView(
+          controller: pageController,
+          children: <Widget>[HomeScreen(), ScanScreen(), ReductionScreen()],
+        ),
+        bottomNavigationBar: CustomBottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: this.pageChanged,
+        ));
   }
 }
