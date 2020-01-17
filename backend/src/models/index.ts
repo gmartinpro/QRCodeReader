@@ -1,3 +1,6 @@
 export enum Models {
-  User = "user"
+  User = "user",
+  Promotion = 'promotion',
+  QRCode = 'qrCode',
+  Product = 'product'
 }

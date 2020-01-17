@@ -1,6 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from '@config/'
 import { Models } from '@models/'
+import { Promotion } from '@models/Promotion';
 
 export interface UserInterface {
   id_user: string;
@@ -8,30 +9,35 @@ export interface UserInterface {
   createdAt?: Date;
   updatedAt?: Date;
 }
-export class User extends Model {
-  public id_user!: string;
-  public name!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
+// export class User extends Model {
+//   public id_user!: string;
+//   public name!: string;
+//   public readonly createdAt!: Date;
+//   public readonly updatedAt!: Date;
+// }
 
-User.init(
-  {
-    id_user: {
-      type: DataTypes.UUID,
-      unique: true,
-      primaryKey: true,
-    },
-    name: {
-      type: new DataTypes.STRING(128),
-      allowNull: false
-    }
+export const User = sequelize.define(Models.User, {
+  id_user: {
+    type: DataTypes.UUID,
+    unique: true,
+    primaryKey: true,
   },
+  name: {
+    type: new DataTypes.STRING(128),
+    allowNull: false
+  }
+},
   {
-    tableName: "user",
+    tableName: Models.User,
     modelName: Models.User,
-    sequelize: sequelize,
   }
 );
 
-User.sync()
+
+
+User.sync();
+
+
+User.hasMany(Promotion);
+
+// const user = new User()
