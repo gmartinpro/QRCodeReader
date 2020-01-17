@@ -15,6 +15,7 @@ export class User extends Model {
   public readonly updatedAt!: Date;
 }
 
+
 User.init(
   {
     id_user: {
