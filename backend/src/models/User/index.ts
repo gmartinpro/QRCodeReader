@@ -9,35 +9,32 @@ export interface UserInterface {
   createdAt?: Date;
   updatedAt?: Date;
 }
-// export class User extends Model {
-//   public id_user!: string;
-//   public name!: string;
-//   public readonly createdAt!: Date;
-//   public readonly updatedAt!: Date;
-// }
+export class User extends Model {
+  public id_user!: string;
+  public name!: string;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
 
-export const User = sequelize.define(Models.User, {
-  id_user: {
-    type: DataTypes.UUID,
-    unique: true,
-    primaryKey: true,
+User.init(
+  {
+    id_user: {
+      type: DataTypes.UUID,
+      unique: true,
+      primaryKey: true
+    },
+    name: {
+      type: new DataTypes.STRING(128),
+      allowNull: false
+    }
   },
-  name: {
-    type: new DataTypes.STRING(128),
-    allowNull: false
-  }
-},
   {
     tableName: Models.User,
     modelName: Models.User,
+    sequelize
   }
 );
 
-
-
-User.sync();
-
-
 User.hasMany(Promotion);
 
-// const user = new User()
+User.sync();

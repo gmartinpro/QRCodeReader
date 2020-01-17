@@ -1,12 +1,12 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from '@config/'
 import { Models } from '@models/'
-import { Product } from '@models/Product';
+import { Promotion } from '@models/Promotion';
 
 export interface QRCodeInterface {
-    id_qrCode: string;
-    createdAt?: Date;
-    updatedAt?: Date;
+  id_qrCode: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export class QRCode extends Model {
@@ -31,5 +31,3 @@ QRCode.init(
 );
 
 QRCode.sync();
-
-QRCode.hasOne(Product);

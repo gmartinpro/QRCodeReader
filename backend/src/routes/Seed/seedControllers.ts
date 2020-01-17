@@ -28,7 +28,7 @@ export function parseAndExecute() {
             await up(queryInterface);
             console.log("End of seed of ", file);
           } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
           }
         } else {
           console.log("Skip ", file);
