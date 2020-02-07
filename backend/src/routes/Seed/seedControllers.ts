@@ -20,15 +20,19 @@ export function parseAndExecute() {
       asyncForEach(files, async function(file) {
         // Do whatever you want to do with the file
         if (file.endsWith(".ts")) {
-          console.log("Seed of ", file);
+          console.log("\x1b[32m", "Seed of ", file, "\x1b[0m");
           try {
             const { up } = require(path.normalize(
               path.join(seedersPath, file)
             ));
             await up(queryInterface);
-            console.log("End of seed of ", file);
+          console.log("\x1b[32m", "End of ", file, "\x1b[0m");
           } catch (error) {
-            console.log(error.message);
+            console.error(
+              "\x1b[31m",
+              `${error.parent.code}: ${error.message}`,
+              "\x1b[0m"
+            );
           }
         } else {
           console.log("Skip ", file);
@@ -37,8 +41,20 @@ export function parseAndExecute() {
     });
 }
 
-export const seedControllers: RequestHandler = async (_req, res) => {
+export async function parseAndDelete() {
+  const seedersPath = path.normalize(
+    path.join(__dirname, "..", "..", "seeders")
+  );
 
+  await sequelize.drop()
+}
+
+export const seedControllers: RequestHandler = async (_req, res) => {
   await parseAndExecute()
   res.status(200).send("Seeds ! 🚀")
+};
+
+export const seedFlush: RequestHandler = async (_req, res) => {
+    await parseAndDelete();
+    res.status(200).send("Flush ! 🚀");
 };

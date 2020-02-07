@@ -7,7 +7,7 @@ export function userRouter() {
   router.get("/", (_req: Request, res: Response) => res.status(200).send("User routes ! 🚀"));
   router.get(
     "/users",
-    async (req, res, next) => await await debugUserController(req, res, next)
+    async (req, res, next) => await debugUserController(req, res, next)
   );
 
   return router;

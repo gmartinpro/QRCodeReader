@@ -1,6 +1,8 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from '@config/'
-import { Models } from '@models/'
+import { sequelize } from "@config/";
+import { Models } from "@models/";
+import { Promotion } from "@models/Promotion";
+import { UserPromotion } from "@models/Associations";
 
 export interface UserInterface {
   id_user: string;
@@ -21,7 +23,7 @@ User.init(
     id_user: {
       type: DataTypes.UUID,
       unique: true,
-      primaryKey: true,
+      primaryKey: true
     },
     name: {
       type: new DataTypes.STRING(128),
@@ -29,10 +31,23 @@ User.init(
     }
   },
   {
-    tableName: "user",
+    tableName: Models.User,
     modelName: Models.User,
-    sequelize: sequelize,
+    sequelize
   }
 );
 
-User.sync()
+
+User.belongsToMany(Promotion, {
+  through: UserPromotion,
+  foreignKey: "id_user",
+  as: Models.User_Promotion
+});
+Promotion.belongsToMany(User, {
+  through: UserPromotion,
+  foreignKey: "id_promotion",
+  as: Models.User_Promotion
+});
+
+
+User.sync();

@@ -1,13 +1,15 @@
 import { Sequelize, Options } from "sequelize";
 import path from "path";
-import { parseAndExecute } from '@routes/Seed/seedControllers';
+import { parseAndExecute } from "@routes/Seed/seedControllers";
 
 export const sequelizeConfig: Options = {
   dialect: "sqlite",
-  storage: path.normalize(path.join(__dirname, "..", "database", "sqlite.sqlite")),
+  storage: path.normalize(
+    path.join(__dirname, "..", "database", "sqlite.sqlite")
+  )
 };
 
-export const sequelize = new Sequelize(sequelizeConfig);
+export const sequelize = new Sequelize(sequelizeConfig)
 
 export async function InitializeSequelizeConnection() {
   try {
