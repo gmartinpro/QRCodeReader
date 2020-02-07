@@ -1,7 +1,8 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from '@config/'
-import { Models } from '@models/'
-import { Promotion } from '@models/Promotion';
+import { sequelize } from "@config/";
+import { Models } from "@models/";
+import { Promotion } from "@models/Promotion";
+import { UserPromotion } from "@models/Associations";
 
 export interface UserInterface {
   id_user: string;
@@ -35,6 +36,16 @@ User.init(
   }
 );
 
-User.hasMany(Promotion);
+
+User.belongsToMany(Promotion, {
+  through: UserPromotion,
+  foreignKey: "id_user",
+  as: Models.User_Promotion
+});
+Promotion.belongsToMany(User, {
+  through: UserPromotion,
+  foreignKey: "id_promotion",
+  as: Models.User_Promotion
+});
 
 User.sync();

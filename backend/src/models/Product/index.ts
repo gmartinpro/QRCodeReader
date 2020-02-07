@@ -46,13 +46,6 @@ Product.init(
       type: new DataTypes.FLOAT(),
       allowNull: false
     }
-    // promotion_id : {
-    //     type: DataTypes.UUID,
-    //     references: {
-    //        model: 'Promotion',
-    //        key: 'id_promotion',
-    //     }
-    // }
   },
   {
     tableName: Models.Product,

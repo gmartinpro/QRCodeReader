@@ -1,10 +1,7 @@
 import { QueryInterface } from "sequelize";
-import faker from "faker";
 
 import { UuidManager } from "../helpers/UuidManager";
 import { Models } from "@models/";
-import { PromotionInterface } from "@models/Promotion";
-import { ProductInterface } from "@models/Product";
 import { QRCodeInterface } from "@models/QRCode";
 
 const uuidManager = new UuidManager();

@@ -1,0 +1,1 @@
+export { UserPromotion, UserPromotionInterface } from './User_Promotion'

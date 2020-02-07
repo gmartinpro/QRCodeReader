@@ -1,7 +1,8 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "@config/";
 import { Models } from "@models/";
 import { QRCode } from "@models/QRCode";
+import { User } from '@models/User';
 
 export interface PromotionInterface {
   id_promotion: string;
@@ -25,7 +26,7 @@ Promotion.init(
       primaryKey: true
     },
     reduction_percentage: {
-      type: new DataTypes.FLOAT(),
+      type: DataTypes.FLOAT,
       allowNull: false
     }
   },
