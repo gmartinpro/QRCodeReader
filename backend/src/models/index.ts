@@ -3,7 +3,8 @@ export enum Models {
   Promotion = "promotion",
   QRCode = "qrCode",
   User = "user",
-  User_Promotion = "user_promotion"
+  User_Promotion = "user_promotion",
+  Promotion_Product = "promotion_product"
 }
 
 

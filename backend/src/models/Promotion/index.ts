@@ -2,11 +2,13 @@ import { Model, DataTypes, Sequelize } from "sequelize";
 import { sequelize } from "@config/";
 import { Models } from "@models/";
 import { QRCode } from "@models/QRCode";
-import { User } from '@models/User';
+import { Product } from "@models/Product";
+import { PromotionProduct } from "@models/Associations";
 
 export interface PromotionInterface {
   id_promotion: string;
   reduction_percentage: number;
+  qrCodeIdQrCode: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -37,8 +39,20 @@ Promotion.init(
   }
 );
 
-//Liaison avec les autres tables
-Promotion.hasOne(QRCode);
+Promotion.belongsTo(QRCode, {
+  constraints: true
+});
+QRCode.hasOne(Promotion, { constraints: true });
+
+Promotion.belongsToMany(Product, {
+  through: PromotionProduct,
+  foreignKey: "id_promotion",
+  as: Models.Promotion_Product
+});
+Product.belongsToMany(Promotion, {
+  through: PromotionProduct,
+  foreignKey: "id_product",
+  as: Models.Promotion_Product
+});
 
 Promotion.sync();
-

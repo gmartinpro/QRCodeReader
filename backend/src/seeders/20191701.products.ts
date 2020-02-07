@@ -70,5 +70,5 @@ export const up = async (sequelize: QueryInterface) => {
   await productImport(sequelize);
 };
 export const down = async (sequelize: QueryInterface) => {
-  await sequelize.bulkDelete(Models.User, {});
+  await sequelize.bulkDelete(Models.Product, {});
 };

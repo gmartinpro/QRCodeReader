@@ -41,8 +41,20 @@ export function parseAndExecute() {
     });
 }
 
-export const seedControllers: RequestHandler = async (_req, res) => {
+export async function parseAndDelete() {
+  const seedersPath = path.normalize(
+    path.join(__dirname, "..", "..", "seeders")
+  );
 
+  await sequelize.drop()
+}
+
+export const seedControllers: RequestHandler = async (_req, res) => {
   await parseAndExecute()
   res.status(200).send("Seeds ! 🚀")
+};
+
+export const seedFlush: RequestHandler = async (_req, res) => {
+    await parseAndDelete();
+    res.status(200).send("Flush ! 🚀");
 };

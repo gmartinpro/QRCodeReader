@@ -54,10 +54,6 @@ Product.init(
   }
 );
 
-//Liaison avec les autres tables
-Product.hasMany(Promotion, {
-  as: Models.Promotion,
-  foreignKey: "id_promotion"
-});
+//
 
 Product.sync();

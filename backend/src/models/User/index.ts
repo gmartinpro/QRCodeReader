@@ -48,4 +48,5 @@ Promotion.belongsToMany(User, {
   as: Models.User_Promotion
 });
 
+
 User.sync();

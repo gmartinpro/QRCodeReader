@@ -2,29 +2,29 @@ import { Model, DataTypes } from "sequelize";
 import { sequelize } from "@config/";
 import { Models } from "@models/";
 
-export interface UserPromotionInterface {
-  id_user: string;
-  id_promotion: string;
-  id_user_promotion?: string;
+export interface PromotionProductInterface {
+  id_promotion_product: string;
+  id_product: string;
+  id_promotion?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
-export class UserPromotion extends Model implements UserPromotionInterface {
-  public id_user_promotion!: string;
-  public id_user!: string;
+export class PromotionProduct extends Model implements PromotionProductInterface {
+  public id_promotion_product!: string;
+  public id_product!: string;
   public id_promotion!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-UserPromotion.init(
+PromotionProduct.init(
   {
-    id_user_promotion: {
+    id_promotion_product: {
       type: DataTypes.UUID,
       unique: true,
       primaryKey: true
     },
-    id_user: {
+    id_product: {
       type: DataTypes.UUID,
       allowNull: false
     },
@@ -34,10 +34,9 @@ UserPromotion.init(
     }
   },
   {
-    tableName: Models.User_Promotion,
+    tableName: Models.Promotion_Product,
     sequelize
   }
 );
 
-
-UserPromotion.sync();
+PromotionProduct.sync();
