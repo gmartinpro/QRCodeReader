@@ -1,18 +1,15 @@
-import { QueryInterface, Transaction } from "sequelize";
+import { QueryInterface } from "sequelize";
 
 import { UuidManager } from "../helpers/UuidManager";
 import { Models } from "@models/";
 import { UserPromotionInterface, PromotionProductInterface } from "@models/Associations";
-import { asyncForEach } from '@helpers/';
-import { Promotion } from '@models/Promotion';
-import { QRCode } from '@models/QRCode';
 
 const uuidManager = new UuidManager();
 
 /**
  * @returns {Promise<Object>}
  */
-const promotionUser = async function(sequelize: QueryInterface) {
+const promotionUser = async function (sequelize: QueryInterface) {
   const user_promotions: UserPromotionInterface[] = [
     {
       id_user_promotion: uuidManager.getUuid(Models.User_Promotion, 1)!,
@@ -49,7 +46,7 @@ const promotionUser = async function(sequelize: QueryInterface) {
   return sequelize.bulkInsert(Models.User_Promotion, user_promotions);
 };
 
-const promotionProduct = async function(sequelize: QueryInterface) {
+const promotionProduct = async function (sequelize: QueryInterface) {
   const promotion_product: PromotionProductInterface[] = [
     {
       id_promotion_product: uuidManager.getUuid(Models.Promotion_Product, 1)!,

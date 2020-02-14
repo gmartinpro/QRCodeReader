@@ -9,30 +9,35 @@ const uuidManager = new UuidManager();
 /**
  * @returns {Promise<Object>}
  */
-const qrcodeImport = async function(sequelize: QueryInterface) {
+const qrcodeImport = async function (sequelize: QueryInterface) {
   const qrcodes: QRCodeInterface[] = [
     {
       id_qrCode: uuidManager.getUuid(Models.QRCode, 1)!,
+      url: "",
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
       id_qrCode: uuidManager.getUuid(Models.QRCode, 2)!,
+      url: "",
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
       id_qrCode: uuidManager.getUuid(Models.QRCode, 3)!,
+      url: "",
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
       id_qrCode: uuidManager.getUuid(Models.QRCode, 4)!,
+      url: "",
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
       id_qrCode: uuidManager.getUuid(Models.QRCode, 5)!,
+      url: "",
       createdAt: new Date(),
       updatedAt: new Date()
     }

@@ -21,6 +21,9 @@ import 'dart:async';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:mspr/models/QRCode.dart';
 
 class ScanScreen extends StatefulWidget {
   @override
@@ -29,7 +32,7 @@ class ScanScreen extends StatefulWidget {
 
 class _ScanState extends State<ScanScreen> {
   String barcode = "";
-
+  String api ="http://192.168.43.209:3001";
   @override
   initState() {
     super.initState();
@@ -71,6 +74,8 @@ class _ScanState extends State<ScanScreen> {
     try {
       String barcode = await BarcodeScanner.scan();
       setState(() => this.barcode = barcode);
+      print('mon penis');
+      await this.getPromotionFromBarcode();
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
@@ -85,4 +90,13 @@ class _ScanState extends State<ScanScreen> {
       setState(() => this.barcode = 'Unknown error: $e');
     }
   }
+
+  Future getPromotionFromBarcode() async{
+    print("--------------------- ICI -------------------");
+    final response = await http.get(api+'/qrCode/qrCodes');
+    print(response.body);
+    print("--------------------- FINI -------------------");
+
+  }
+
 }

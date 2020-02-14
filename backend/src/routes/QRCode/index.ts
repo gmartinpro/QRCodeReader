@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { debugQRCodeController } from "./_debug";
+import { generateQRCode } from './qrcode-generator';
 
 export function qrcodeRouter() {
   const router = express.Router();
@@ -11,6 +12,9 @@ export function qrcodeRouter() {
     "/qrcodes",
     async (req, res, next) => await debugQRCodeController(req, res, next)
   );
-
+  router.post(
+    "/generate",
+    async (req, res, next) => await generateQRCode(req, res, next)
+  );
   return router;
 }
