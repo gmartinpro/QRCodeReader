@@ -6,6 +6,12 @@ import logger from "morgan";
 import { InitializeSequelizeConnection } from "@config/";
 import { AddressInfo } from "net";
 import { mainRouter } from "@routes/";
+import { User } from "@models/User";
+import { QRCode } from "@models/QRCode";
+import { Promotion } from "@models/Promotion";
+import { Product } from "@models/Product";
+import { UserPromotion, PromotionProduct } from "@models/Associations";
+import { parseAndExecute } from "@routes/Seed/seedControllers";
 
 // Enebale .env
 dotenv.config();
@@ -31,7 +37,18 @@ app.use("/", mainRouter());
 app.use("/public", express.static("public"));
 app.set("port", PORT);
 
-InitializeSequelizeConnection().then(() => server.listen(PORT));
+InitializeSequelizeConnection().then(async () => {
+  await User.sync({ force: true });
+  await QRCode.sync({ force: true });
+  await Promotion.sync({ force: true });
+  await Product.sync({ force: true });
+  await UserPromotion.sync({ force: true });
+  await PromotionProduct.sync({ force: true });
+
+  await parseAndExecute();
+
+  server.listen(PORT);
+});
 
 server.on("error", (error: any) => {
   if (error.syscall !== "listen") {

@@ -36,4 +36,3 @@ QRCode.init(
   }
 );
 
-QRCode.sync();

@@ -17,7 +17,6 @@ export class User extends Model {
   public readonly updatedAt!: Date;
 }
 
-
 User.init(
   {
     id_user: {
@@ -37,7 +36,6 @@ User.init(
   }
 );
 
-
 User.belongsToMany(Promotion, {
   through: UserPromotion,
   foreignKey: "id_user",
@@ -49,5 +47,3 @@ Promotion.belongsToMany(User, {
   as: Models.User_Promotion
 });
 
-
-User.sync();

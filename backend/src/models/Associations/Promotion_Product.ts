@@ -9,7 +9,8 @@ export interface PromotionProductInterface {
   createdAt?: Date;
   updatedAt?: Date;
 }
-export class PromotionProduct extends Model implements PromotionProductInterface {
+export class PromotionProduct extends Model
+  implements PromotionProductInterface {
   public id_promotion_product!: string;
   public id_product!: string;
   public id_promotion!: string;
@@ -39,4 +40,3 @@ PromotionProduct.init(
   }
 );
 
-PromotionProduct.sync();
