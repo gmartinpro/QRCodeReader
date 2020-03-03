@@ -1,5 +1,4 @@
 import { QueryInterface } from "sequelize";
-import faker from "faker";
 
 import { UuidManager } from "../helpers/UuidManager";
 import { Models } from "@models/";
@@ -10,7 +9,7 @@ const uuidManager = new UuidManager();
 /**
  * @returns {Promise<Object>}
  */
-const promotionsImport = async function(sequelize: QueryInterface) {
+const promotionsImport = async function (sequelize: QueryInterface) {
   const promotions: PromotionInterface[] = [
     {
       id_promotion: uuidManager.getUuid(Models.Promotion, 1)!,

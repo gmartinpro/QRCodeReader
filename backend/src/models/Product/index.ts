@@ -53,7 +53,3 @@ Product.init(
     sequelize: sequelize
   }
 );
-
-//
-
-Product.sync();

@@ -55,4 +55,3 @@ Product.belongsToMany(Promotion, {
   as: Models.Promotion_Product
 });
 
-Promotion.sync();
